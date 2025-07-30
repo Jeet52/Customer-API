@@ -37,6 +37,6 @@ steps:
 
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: 'AzureConnection'  # This must match your actual service connection name
-    appName: 'customer-api-app'           # This must match your Azure App Service name
+    azureSubscription: 'AzureConnection'  # Replace with your actual service connection name
+    appName: 'customer-api-app'           # Replace with your Azure App Service name
     package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
