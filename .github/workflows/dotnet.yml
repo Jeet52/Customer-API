@@ -1,7 +1,11 @@
+
 name: Build and Deploy ASP.NET Core Web API
 
 on:
   push:
+    branches:
+      - main
+  pull_request:
     branches:
       - main
 
@@ -12,10 +16,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Setup .NET
+    - name: Setup .NET SDK
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '8.x'
+        dotnet-version: 8.0.x
 
     - name: Restore dependencies
       run: dotnet restore
@@ -23,12 +27,15 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
 
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+
     - name: Publish
       run: dotnet publish -c Release -o publish_output
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'customer-api-app'      # Your Azure Web App name
+        app-name: 'customer-api-app'      # Replace with your actual Azure Web App name
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         package: ./publish_output
