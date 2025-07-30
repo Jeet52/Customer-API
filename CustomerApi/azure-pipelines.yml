@@ -12,6 +12,7 @@ steps:
   inputs:
     packageType: 'sdk'
     version: '8.x'
+    installationPath: $(Agent.ToolsDirectory)/dotnet
 
 - task: DotNetCoreCLI@2
   inputs:
@@ -36,6 +37,6 @@ steps:
 
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: '<Your Azure DevOps Service Connection>'
-    appName: 'customer-api-jeet123'
+    azureSubscription: 'AzureConnection'  # Your exact service connection name
+    appName: 'customer-api-app'           # Your Azure App Service name
     package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
