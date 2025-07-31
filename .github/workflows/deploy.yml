@@ -3,7 +3,7 @@ name: Build and Deploy to Azure Web App
 on:
   push:
     branches:
-      - main  # triggers when you push to main
+      - main
 
 jobs:
   build-and-deploy:
@@ -19,18 +19,18 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: cd CustomerApi && dotnet restore
 
       - name: Build project
-        run: dotnet build --no-restore
+        run: cd CustomerApi && dotnet build --no-restore
 
       - name: Publish project
-        run: dotnet publish -c Release -o publish
+        run: cd CustomerApi && dotnet publish -c Release -o publish
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
-          app-name: customer-api-app-jeet123  # Your Azure Web App name
+          app-name: customer-api-app-jeet123
           slot-name: production
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: publish
+          package: CustomerApi/publish
