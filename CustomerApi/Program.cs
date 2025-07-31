@@ -18,12 +18,46 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
-// Enable Swagger UI at root URL
+// Serve a nice custom HTML page at root "/"
+app.MapGet("/", () => Results.Content(@"
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1' />
+<title>Welcome to Customer API</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f0f4f8; text-align: center; padding: 50px; }
+  h1 { color: #2a9df4; }
+  p { font-size: 18px; color: #555; }
+  a.button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    font-size: 18px;
+    color: white;
+    background-color: #2a9df4;
+    border-radius: 6px;
+    text-decoration: none;
+  }
+  a.button:hover {
+    background-color: #1c7ed6;
+  }
+</style>
+</head>
+<body>
+  <h1>Welcome to Customer API</h1>
+  <p>This API lets you manage customers with ease.</p>
+  <a href='/swagger' class='button'>View API Documentation</a>
+</body>
+</html>", "text/html"));
+
+// Enable Swagger UI at "/swagger"
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Customer API V1");
-    c.RoutePrefix = string.Empty;
+    c.RoutePrefix = "swagger";  // Swagger UI is at /swagger now
 });
 
 // CRUD endpoints for Customers using EF Core
