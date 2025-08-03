@@ -93,12 +93,14 @@ This week-long project helped me learn how to build a RESTful Web API using C# a
 5. Open https://localhost:5001/swagger to explore the API
 
 📡 API Endpoints
-HTTP Method	Endpoint	Description
-GET	/api/customers	Retrieve all customers
-GET	/api/customers/{id}	Retrieve customer by ID
-POST	/api/customers	Create a new customer
-PUT	/api/customers/{id}	Update customer by ID
-DELETE	/api/customers/{id}	Delete customer by ID
+## 📡 API Endpoints
+
+- **GET** `/api/customers` — Retrieve all customers  
+- **GET** `/api/customers/{id}` — Retrieve a customer by ID  
+- **POST** `/api/customers` — Create a new customer  
+- **PUT** `/api/customers/{id}` — Update a customer by ID  
+- **DELETE** `/api/customers/{id}` — Delete a customer by ID  
+
 🎤 Final Thoughts
 This project gave me hands-on experience working with modern cloud and DevOps tools. Setting up GitHub Actions for CI/CD helped me automate deployment smoothly, and deploying the API to Azure App Service was a big confidence boost. I’m excited to use these skills in upcoming internships and projects!
 Feel free to reach out if you want to know more or collaborate!
